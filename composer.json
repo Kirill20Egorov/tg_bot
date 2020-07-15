@@ -1,0 +1,13 @@
+{
+    "name": "user/tg_bot",
+    "require": {
+        "composer-plugin-api": "^1.1",
+        "composer-runtime-api": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Kirill20Egorov",
+            "email": "kirill1337egorov2000@gmail.com"
+        }
+    ]
+}

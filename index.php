@@ -10,10 +10,10 @@
 	$keyboard = [["Последние статьи"],["Картинка"],["Гифка"]]; //Клавиатура
 	if($text)
 	{
-		if($text == "/start") {
-		$reply = "Добро пожаловать в бота!";
-		$reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => false ]);
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup ]);
+		if($text == "/start") 
+		{
+			$reply = $name . ", Добро пожаловать в бота! ";
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}elseif ($text == "/help") 
 		{
 		$reply = "Информация с помощью.";
@@ -37,7 +37,7 @@
 		}else
 		{
 			$reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Hello, ' . $name ]);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}
 	}
 	else

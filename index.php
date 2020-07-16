@@ -12,7 +12,7 @@
 		if ($text == "/start") 
 		{
 			$reply = "Добро пожаловать в бота, " . $name . '!';
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply]);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
 		}
 		if ($text == "/help") 
 		{

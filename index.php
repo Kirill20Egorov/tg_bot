@@ -16,9 +16,10 @@ $name = $result["message"]["from"]["username"]; //Юзернейм пользо�
 
 $keyboard = [["Последние статьи"],["Картинка"],["Гифка"]]; //Клавиатура
 
-if($text)
+if(isset($text))
 {
   $reply = "!По запросу \"<b>".$text."</b>\" ничего не найдено.!";
   $telegram->sendMessage(['chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply ]);
-  $telegram->sendMessage(['chat_id' => $chat_id, 'parse-mode'=> 'HTML', 'text' => $name ]);
+  $telegram->sendMessage(['chat_id' => $chat_id, 'parse-mode'=> 'HTML', 'text' => $result]);
 }
+$text = '';

@@ -60,7 +60,7 @@ $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode' => 'HTML', 'disable
 
  $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 
- $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $name ]);
+ $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Hello, ' . $name ]);
 
 }
 

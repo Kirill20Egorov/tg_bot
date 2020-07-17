@@ -32,6 +32,9 @@
 			if($text == 'письма')
 			{
 				$result = $telegram -> getWebhookUpdates();
+				$text = $result["message"]["text"]; //Текст сообщения
+	            $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
+	            $name = $result["message"]["from"]["first_name"]; 
 				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
 	            var_dump($url);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);

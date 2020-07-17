@@ -21,7 +21,7 @@
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-CURLOPT_URL => "https://api-football-v1.p.rapidapi.com/v2/predictions/157462",
+CURLOPT_URL => "https://api.gismeteo.net/v2/search/cities/?",
 CURLOPT_RETURNTRANSFER => true,
 CURLOPT_FOLLOWLOCATION => true,
 CURLOPT_ENCODING => "",
@@ -30,8 +30,8 @@ CURLOPT_TIMEOUT => 30,
 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 CURLOPT_CUSTOMREQUEST => "GET",
 CURLOPT_HTTPHEADER => array(
-"x-rapidapi-host: api-football-v1.p.rapidapi.com",
-"x-rapidapi-key: be8ec33d62mshe1e726c3ca0fa24p126768jsn77ec94ff6e53"
+"X-Gismeteo-Token: 56b30cb255.3443075",
+"Accept-Encoding: deflate, gzip"
 ),
 ));
 

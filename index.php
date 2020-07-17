@@ -20,12 +20,11 @@
 			if($text == 'мыло')
 			{
                 $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
+                $text = $url;
 	            var_dump($url);
-	            foreach ($url as $key)
-                {
-				    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $key]);
-                }
- 
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
+			    json_decode($text);
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $text['email']]);
 
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);

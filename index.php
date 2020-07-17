@@ -21,10 +21,8 @@
 			{
                 $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
 	            var_dump($url);
-	            foreach ($url as $key)
-                {
-				    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $key]);
-                }
+				    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
+
  
 
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";

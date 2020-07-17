@@ -18,12 +18,33 @@
 		}
 		else
 		{
-			$number = $text;
-			$data = curl_init();
-			curl_setopt($data, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($data, CURLOPT_URL, $url . $number);
-			$response = curl_exec($data);
-			curl_close($data);
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+CURLOPT_URL => "http://api-football-v1.p.rapidapi.com/v2/predictions/157462",
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_FOLLOWLOCATION => true,
+CURLOPT_ENCODING => "",
+CURLOPT_MAXREDIRS => 10,
+CURLOPT_TIMEOUT => 30,
+CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+CURLOPT_CUSTOMREQUEST => "GET",
+CURLOPT_HTTPHEADER => array(
+"x-rapidapi-host: api-football-v1.p.rapidapi.com",
+"x-rapidapi-key: be8ec33d62mshe1e726c3ca0fa24p126768jsn77ec94ff6e53"
+),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+echo "cURL Error #:" . $err;
+} else {
+echo $response;
+}
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $response]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);

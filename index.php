@@ -23,20 +23,16 @@
                 $text = $url;
 	            var_dump($url);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
-			    json_decode($text);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $text['email']]);
+                $obj = json_decode($url);
+                $key = $obj -> key;
 
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}
 			if($text == 'письма')
 			{
-				$result = $telegram -> getWebhookUpdates();
-				$text = $result["message"]["text"]; //Текст сообщения
-	            $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
-	            $name = $result["message"]["from"]["first_name"]; 
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
-	            var_dump($url);
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $key]);
+				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $key);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
 			}
 		}

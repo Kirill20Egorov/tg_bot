@@ -28,13 +28,7 @@
 
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
-			}
-			if($text == 'письма')
-			{
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $key]);
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $key);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
-			}
+			}			
 		}
 		if ($text == "/help") 
 		{
@@ -60,6 +54,11 @@
 		// 	}
 		// 	$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode' => 'HTML', 'disable_web_page_preview' => true, 'text' => $reply ]);
 		// }
+		else{
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $text]);
+				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
+		}
 
 	}
 	else

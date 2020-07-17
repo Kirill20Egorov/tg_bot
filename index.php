@@ -17,12 +17,14 @@
 		}
 		else
 		{
-            $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
-	        var_dump($url);
-	        $text = 'aba';
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url . $text]);
+			if($text == 'мыло')
+			{
+                $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
+	            var_dump($url);
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
+			}
 		}
 		if ($text == "/help") 
 		{

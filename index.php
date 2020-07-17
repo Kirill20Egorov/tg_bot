@@ -18,34 +18,12 @@
 		}
 		else
 		{
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-CURLOPT_URL => "https://api.gismeteo.net/v2/search/cities/?lang=en&query=москв",
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_FOLLOWLOCATION => true,
-CURLOPT_ENCODING => "",
-CURLOPT_MAXREDIRS => 10,
-CURLOPT_TIMEOUT => 30,
-CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-CURLOPT_CUSTOMREQUEST => "GET",
-CURLOPT_HTTPHEADER => array(
-"X-Gismeteo-Token: 56b30cb255.3443075",
-"Accept-Encoding: deflate, gzip"
-),
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-echo "cURL Error #:" . $err;
-} else {
+$url =  file_get_contents("https://post-shift.ru/api.php?action=new");
+var_dump($url);
+$response = json_decode($url);
 echo $response;
-}
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $repsonse]);
+
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $response]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}

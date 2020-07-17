@@ -21,7 +21,7 @@
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-CURLOPT_URL => "https://api.gismeteo.net/v2/search/cities/?",
+CURLOPT_URL => "https://api.gismeteo.net/v2/search/cities/?lang=en&query=москв",
 CURLOPT_RETURNTRANSFER => true,
 CURLOPT_FOLLOWLOCATION => true,
 CURLOPT_ENCODING => "",
@@ -31,6 +31,7 @@ CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 CURLOPT_CUSTOMREQUEST => "GET",
 CURLOPT_HTTPHEADER => array(
 "X-Gismeteo-Token: 56b30cb255.3443075",
+"Accept-Encoding: deflate, gzip"
 ),
 ));
 
@@ -44,7 +45,8 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $response]);
+$text = json_decode($repsonse, true);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $text]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}

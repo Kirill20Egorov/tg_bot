@@ -8,7 +8,6 @@
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
 	$keyboard = [["Последние статьи"],["Картинка"],["Гифка"]]; //Клавиатура
-	$url = 'http://vin-car1.a0001.net/api.php?nomer=';
 	if($text)
 	{
 		if($text == "/start") 
@@ -18,12 +17,11 @@
 		}
 		else
 		{
-$url =  file_get_contents("https://post-shift.ru/api.php?action=new");
-var_dump($url);
-$response = json_decode($url);
-echo $response;
-
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $response]);
+            $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
+	        var_dump($url);
+	        $response = json_decode($url);
+	        $text = 'aba';
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $response . $text]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}

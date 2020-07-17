@@ -21,7 +21,7 @@
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-CURLOPT_URL => "http://api-football-v1.p.rapidapi.com/v2/predictions/157462",
+CURLOPT_URL => "https://api-football-v1.p.rapidapi.com/v2/predictions/157462",
 CURLOPT_RETURNTRANSFER => true,
 CURLOPT_FOLLOWLOCATION => true,
 CURLOPT_ENCODING => "",
@@ -45,8 +45,7 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
-$text = json_decode($repsonse, true);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $text]);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $response]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}

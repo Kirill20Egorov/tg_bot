@@ -31,7 +31,6 @@ CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 CURLOPT_CUSTOMREQUEST => "GET",
 CURLOPT_HTTPHEADER => array(
 "X-Gismeteo-Token: 56b30cb255.3443075",
-"Accept-Encoding: deflate, gzip"
 ),
 ));
 

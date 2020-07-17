@@ -1,7 +1,7 @@
 <?php
 
 	include('vendor/autoload.php'); //Подключаем библиотеку
-    include('menu.php')
+    include('menu.php');
  	use Telegram\Bot\Api;
 	$telegram = new Api('1234407965:AAEgvF_OTn7A0KutIWRTzfiX2AhKTfaSXC4'); //Устанавливаем токен, полученный у BotFather
 	$result = $telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
@@ -10,9 +10,9 @@
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
 	if($text)
 	{
-		// $reply = "Menu:";
-		// $reply_markup = $telegram->replyKeyboardMarkUp([ 'keyboard' => menu, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
-		// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply' => $reply, 'reply_markup' => $reply_markup]);
+		$reply = "Menu:";
+		$reply_markup = $telegram->replyKeyboardMarkUp([ 'keyboard' => menu, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
+		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply' => $reply, 'reply_markup' => $reply_markup]);
 		if($text == "/start") 
 		{
 

@@ -14,8 +14,6 @@
 		{
 			$reply = $name . ", Добро пожаловать в бота! ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
-			$reply = "Menu: ";
-			$reply_markup = $telegram->replyKeyboardMarkup([ 'keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => false]);
 		}
 		else
 		{
@@ -25,7 +23,6 @@
                 $text = $url;
 	            var_dump($url);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
-			    			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Привет']);
                 $obj = json_decode($url);
                 $email = $obj -> email;
 

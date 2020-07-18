@@ -26,6 +26,7 @@
                 $text = $url;
 	            var_dump($url);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
+			    			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Привет']);
                 $obj = json_decode($url);
                 $email = $obj -> email;
 

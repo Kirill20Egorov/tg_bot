@@ -18,7 +18,7 @@
 			$params['disable_notification'] = TRUE;
 			$params['parse_mode'] = 'HTML';
 
-			$button_en = array('text' => 'English', 'callback_data' => '/lang_english');
+			$button_en = array('text' => 'Привет', 'callback_data' => '/start');
 			$button_ru = array('text' => 'Мыло', 'callback_data' => 'мыло');
 			        
 			$keyboard = array('inline_keyboard' => array(array($button_en, $button_ru)));
@@ -40,15 +40,15 @@
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}
+			else
+			{
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'сам такой' ]);
+			}
 		}
 		if ($text == "/help") 
 		{
 			$reply = "Информация с помощью.";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-		}
-		else
-		{
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'сам такой' ]);
 		}
 
 	}

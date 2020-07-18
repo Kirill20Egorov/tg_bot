@@ -14,15 +14,17 @@
 		{
 			$reply = $name . ", Добро пожаловать в бота! ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
-			$keyboard = [
-			    'inline_keyboard' => [
-			        [
-			            ['text' => 'Какой-то текст', 'callback_data' => 'данные которые отправятся на webhook когда пользователь нажмет на кнопку']
-			        ]
-			    ]
-			];
-			$encodedKeyboard = json_encode($keyboard);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $encodedKeyboard]);
+			$params['text'] = 'Выберите язык....';
+			$params['disable_notification'] = TRUE;
+			$params['parse_mode'] = 'HTML';
+
+			$button_en = array('text' => 'Привет', 'callback_data' => '/start');
+			$button_ru = array('text' => 'Сгенерировать email', 'callback_data' => 'мыло');
+			        
+			$keyboard = array('inline_keyboard' => array(array($button_en, $button_ru)));
+			$reply_markup = json_encode($keyboard, TRUE);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply_markup' => $reply_markup]);
+
 		}
 		else
 		{

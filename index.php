@@ -18,13 +18,12 @@
 			$params['disable_notification'] = TRUE;
 			$params['parse_mode'] = 'HTML';
 
-			$button_en = array('text' => 'Привет', 'callback_data' => '/start');
-			$button_ru = array('text' => 'Сгенерировать email', 'callback_data' => 'мыло');
+			$button_en = array('text' => 'English', 'callback_data' => '/lang_english');
+			$button_ru = array('text' => 'Русский', 'callback_data' => '/lang_russian');
 			        
 			$keyboard = array('inline_keyboard' => array(array($button_en, $button_ru)));
 			$reply_markup = json_encode($keyboard, TRUE);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply_markup' => $reply_markup]);
-
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
 		}
 		else
 		{
@@ -46,6 +45,10 @@
 		{
 			$reply = "Информация с помощью.";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+		}
+		else
+		{
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'сам такой' ]);
 		}
 
 	}

@@ -19,7 +19,7 @@
 			$params['parse_mode'] = 'HTML';
 
 			$button_en = array('text' => 'English', 'callback_data' => '/lang_english');
-			$button_ru = array('text' => 'Русский', 'callback_data' => '/lang_russian');
+			$button_ru = array('text' => 'Мыло', 'callback_data' => 'мыло');
 			        
 			$keyboard = array('inline_keyboard' => array(array($button_en, $button_ru)));
 			$reply_markup = json_encode($keyboard, TRUE);

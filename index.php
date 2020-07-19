@@ -28,8 +28,8 @@
 	            $obj = json_decode($url);
 	            var_dump($url);
 	            $obj2 = json_decode($url);
-	            $email1 = $obj1 -> email;
-	            $email2 = $obj -> email;
+	            $email1 = $obj1 -> 'email';
+	            $email2 = $obj -> 'email';
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $url]);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $email1);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $email2);

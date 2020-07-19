@@ -29,10 +29,9 @@
 	            var_dump($url);
 	            $obj = json_decode($url);
                 $email = $obj -> email;
-                $key = $key -> key;
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Ваш email: '. $email]);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Ваш пароль: '. $key]);
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $url]);
 
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $email]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}
@@ -44,7 +43,6 @@
 		{
 			$reply = "Информация с помощью.";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Введите команду /email, чтобы создать новую почту"]);
 		}
 
 	}

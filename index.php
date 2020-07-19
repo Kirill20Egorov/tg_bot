@@ -7,7 +7,7 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Привет','Создать почту'], ['Жанр3', 'Жанр4']];
+	$menu = [['Привет','Создать почту']];
 	if($text)
 	{
 		if ($text == "меню")
@@ -19,10 +19,10 @@
 
 		if($text == "/start") 
 		{
-			$reply = $name . ", Добро пожаловать в бота! ";
+			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}
-			if($text == 'Создать почту')
+			if($text == '/email')
 			{
                 $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
                 $text = $url;
@@ -36,7 +36,7 @@
 			}
 			else
 			{
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'сам такой' ]);
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Неизвестная команда' ]);
 			}
 		if ($text == "/help") 
 		{
@@ -44,8 +44,4 @@
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 		}
 
-	}
-	else
-	{
-	 $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => "Отправьте текстовое сообщение." ]);
 	}

@@ -14,26 +14,19 @@
 		{
 			$reply = $name . ", Добро пожаловать в бота! ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
-			$params['text'] = 'Выберите язык....';
-			$params['disable_notification'] = TRUE;
-			$params['parse_mode'] = 'HTML';
-
-			$button_en = array('text' => 'Привет', 'callback_data' => '/start');
-			$button_ru = array('text' => 'Мыло', 'callback_data' => 'мыло');
-			        
-			$keyboard = array('inline_keyboard' => array(array($button_en, $button_ru)));
-			$reply_markup = json_encode($keyboard, TRUE);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
+            $reply = "Menu: ";
+            $reply_markup =  $telegram->replyKeyboardMarkup([' keyboard' => $menu, ' resize_keyboard' => true, 'one_time_keyboard' => false ]);
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
 		}
-		else
+		elseif
 		{
-			if($text == 'мыло')
+			if($text == 'Создать почту')
 			{
+				$reply_markup =  $telegram->replyKeyboardMarkup([' keyboard' => $menu, ' resize_keyboard' => true, 'one_time_keyboard' => false ]);
                 $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
                 $text = $url;
 	            var_dump($url);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url]);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'message']);
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url, 'reply_markup' => $reply_markup]);
                 $obj = json_decode($url);
                 $email = $obj -> email;
 

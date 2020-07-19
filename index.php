@@ -14,19 +14,15 @@
 		{
 			$reply = $name . ", Добро пожаловать в бота! ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
-            $reply = "Menu: ";
-            $reply_markup =  $telegram->replyKeyboardMarkup([' keyboard' => $menu, ' resize_keyboard' => true, 'one_time_keyboard' => false ]);
-            $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
 		}
 		elseif
 		{
 			if($text == 'Создать почту')
 			{
-				$reply_markup =  $telegram->replyKeyboardMarkup([' keyboard' => $menu, ' resize_keyboard' => true, 'one_time_keyboard' => false ]);
                 $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
                 $text = $url;
 	            var_dump($url);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url, 'reply_markup' => $reply_markup]);
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $url);
                 $obj = json_decode($url);
                 $email = $obj -> email;
 

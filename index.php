@@ -27,11 +27,8 @@
 	            $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
 	            $obj = json_decode($url);
 	            var_dump($url);
-	            $obj2 = json_decode($url);
-	            $email1 = $obj -> 'email';
 	            $email2 = $obj -> email;
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $url]);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => '1: ' . $email1]);
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => '2: ' . $email2]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);

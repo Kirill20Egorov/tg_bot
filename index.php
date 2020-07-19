@@ -25,9 +25,8 @@
 			if($text == '/email')
 			{
                 $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
-                $text = $url;
-	            var_dump($url);
 	            $obj = json_decode($url);
+	            var_dump($url);
                 $email = $obj -> email;
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $url]);
 

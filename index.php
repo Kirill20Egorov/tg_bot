@@ -24,11 +24,11 @@
 		}
 			if($text == '/email')
 			{
-	            $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
+	            $url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");
 	            $obj = json_decode($url);
 	            var_dump($url);
-	            $email2 = $obj -> email;
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $url]); 
+	            $email = $obj -> email;
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $email]); 
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}

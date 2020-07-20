@@ -36,8 +36,7 @@
 			}
 			else
 			{
-			  // $url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
-			  // var_dump($url);
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Неизвестная команда' ]);
 			}
 		if ($text == "/help") 
 		{

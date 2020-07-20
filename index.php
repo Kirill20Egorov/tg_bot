@@ -10,11 +10,11 @@
 	$menu = [['Привет','Создать почту']];
 	if($text)
 	{
-		if ($text == "me")
+		if ($text == "m")
 		{
 		    $reply = 'Menu: ';
 			// $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
+			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => [['Здравствуй бот', 'Как меня зовут ?'], ['Случайное число', 'Удалить кнопки']]]);
 		}
 
 		if($text == "/start") 
@@ -22,8 +22,8 @@
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}
-                else
-                {
+        else
+        {
 			if($text == '/email')
 			{
 				$url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");

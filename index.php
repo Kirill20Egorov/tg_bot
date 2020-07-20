@@ -12,9 +12,9 @@
 	{
 		if ($text == "m")
 		{
-		    $reply = 'Menu: ';
+		    $reply = 'Text: ';
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu]);
-			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
 		}
 
 		if($text == "/start") 

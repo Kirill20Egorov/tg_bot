@@ -10,7 +10,7 @@
 	$menu = [['Привет','Создать почту']];
 	if($text)
 	{
-		if ($text == "men")
+		if ($text == "menu")
 		{
 			$reply = 'Menu: ';
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);

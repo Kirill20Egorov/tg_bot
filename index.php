@@ -12,9 +12,9 @@
 	{
 		if ($text == "me")
 		{
-			$reply = 'Menu: ';
-			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => [['Здравствуй бот', 'Как меня зовут ?'], ['Случайное число', 'Удалить кнопки']]]);
+		    $reply = 'Menu: ';
+			// $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
 		}
 
 		if($text == "/start") 

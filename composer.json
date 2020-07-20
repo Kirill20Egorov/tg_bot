@@ -1,13 +1,12 @@
 {
     "name": "user/tg_bot",
-    "require": {
-        "telegram-bot-sdk/telegram-bot-sdk": "^3.1",
-        "telegram-bot/api": "^2.3"
-    },
     "authors": [
         {
             "name": "Kirill20Egorov",
             "email": "kirill1337egorov2000@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "telegram-bot-sdk/telegram-bot-sdk": "^3.1"
+    }
 }

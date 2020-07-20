@@ -7,17 +7,12 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['/start','/email']];
+	$menu = [['/start', '/email']];
 	if($text)
 	{
-		if ($text == "menu")
-		{
-			$reply = "Выберите";
-			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+		$reply = "Выберите";
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-
-		}
-
 		if($text == "/start") 
 		{
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
@@ -38,13 +33,17 @@
 			}
 			else
 			{
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+			    if ($text == "/help") 
+	    	    {
+					$reply = "Информация с помощью.";
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+		        }
+		        else
+		        {
+				    $url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
+				    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+			    }
 			}
-		    if ($text == "/help") 
-	    	{
-			$reply = "Информация с помощью.";
-		    	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-		    }
+
 	    }
 	}

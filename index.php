@@ -10,7 +10,7 @@
 	$menu = [['Привет','Создать почту']];
 	if($text)
 	{
-		if ($text == "m")
+		if ($text == "menu")
 		{
 		    $reply = 'Text: ';
 			$keyboard = array(

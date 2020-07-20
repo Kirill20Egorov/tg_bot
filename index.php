@@ -7,15 +7,15 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Привет','Создать почту']];
+	// $menu = [['Привет','Создать почту']];
 	if($text)
 	{
-		if ($text == "меню")
-		{
-			$reply = 'Привет';
-			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-		}
+		// if ($text == "меню")
+		// {
+		// 	$reply = 'Привет';
+		// 	$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+		// 	$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+		// }
 
 		if($text == "/start") 
 		{
@@ -24,16 +24,9 @@
 		}
 			if($text == '/email')
 			{
-	            $url =  file_get_contents("https://post-shift.ru/api.php?action=new");
-	            $obj = json_decode($url);
-	            var_dump($url);
-	            $email = $obj -> email;
-	            $key = $obj -> key;
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Ваш email: ' . $email]);
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => 'Ваш ключ: ' . $key]); 
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'info']); 
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
-			}
 			}
 			else
 			{

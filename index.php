@@ -7,7 +7,7 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Привет','Создать почту']];
+	$menu = [['/start','/email']];
 	if($text)
 	{
 		if ($text == "menu")

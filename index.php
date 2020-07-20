@@ -22,6 +22,8 @@
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 		}
+        else
+        {
 			if($text == '/email')
 			{
 				$url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");
@@ -38,10 +40,10 @@
 				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 			}
-		if ($text == "/help") 
-		{
-			$reply = "Информация с помощью.";
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-		}
-
+		    if ($text == "/help") 
+	    	{
+			    $reply = "Информация с помощью.";
+		    	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+		    }
+	    }
 	}

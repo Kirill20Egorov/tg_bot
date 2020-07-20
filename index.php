@@ -35,7 +35,7 @@
 			}
 			else
 			{
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text . "&type=json");
+				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 			}
 		if ($text == "/help") 

@@ -24,8 +24,12 @@
 		}
 			if($text == '/email')
 			{
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=new");
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  $url]); 
+				$url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");
+				$obj = json_decode($url);
+				$email =  $obj -> email;
+				$key = $obj -> key;
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email]); 
+			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}

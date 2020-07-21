@@ -32,7 +32,7 @@
 		elseif($text == 'Проверить почту')
 		{
 			$pass = getKey($name);
-			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
+			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass . "&id=1");
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 		}
 		elseif($text == 'Прочесть письмо')

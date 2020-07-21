@@ -42,7 +42,7 @@
 				    die("Connection failed: " . mysqli_connect_error());
 				}
 				 
-				$sql = "INSERT INTO users (name, password, email) VALUES (" . $name  . "," . $key . "," . $email . ")";
+				$sql = "INSERT INTO users (name, password, email) VALUES ($namem, $key, $email)";
 				if (mysqli_query($conn, $sql)) {
 				      echo "New record created successfully";
 				} else {

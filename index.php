@@ -38,10 +38,10 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью!! ";
+					$reply = "Информация с помощью!.! ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 					$row = [];
-					getKey($row);
+					$getKey($row, $name);
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);
 		        }
 		        else

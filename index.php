@@ -31,59 +31,17 @@
 				$key = $obj -> key;
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email]); 
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
-
-					$servername = "eu-cdbr-west-03.cleardb.net";
-					$database = "heroku_c34b9131d7bdccf";
-					$username = "b0f449da77e9fd";
-					$password = "08065c02";
-					$conn = mysqli_connect($servername, $username, $password, $database);
-					// Check connection
-					if (!$conn) 
-					{
-					    die("Connection failed: " . mysqli_connect_error());
-					}	 
-					// sql to delete a record
-					$sql = "DELETE FROM users";
-					if ($conn->query($sql) === TRUE) 
-					{
-					   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'удалили']);
-					} 
-					mysqli_close($conn);
-
+                deleteRecords($name);
 			    addRecord($name, $key, $email);
-			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
-			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}
 			else
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью!.! ";
+					$reply = "Информация с помощью!! ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-					$servername = "eu-cdbr-west-03.cleardb.net";
-					$database = "heroku_c34b9131d7bdccf";
-					$username = "b0f449da77e9fd";
-					$password = "08065c02";
-					$conn = mysqli_connect($servername, $username, $password, $database);
-					// Check connection
-					if (!$conn) 
-					{
-					    die("Connection failed: " . mysqli_connect_error());
-					}	 
-					// sql to delete a record
-					$sql = "SELECT password FROM users";
-					$result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) > 0) 
-                    {
-					    // output data of each row
-					    while($row = mysqli_fetch_assoc($result)) 
-					    {
-					        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ВЗЯЛИ' . $row['password']]);
-					    }
-					} 
-					mysqli_close($conn);
-
-
+					getKey($row);
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['key']]);
 		        }
 		        else
 		        {

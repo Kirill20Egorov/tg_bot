@@ -8,11 +8,11 @@
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
 	$menu = [['/start', '/email']];
-	include('db_connect.php');
-	include('users.php');
+	require_once('db_connect.php');
+	require_once('users.php');
 	if($text)
 	{
-		make_user($name, $chat_id);
+		make_user(make_user($message->getFrom()->getUsername(), $chat_id);
 		$reply = "Меню";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);

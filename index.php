@@ -31,6 +31,13 @@
                 deleteRecords($name);
 			    addRecord($name, $key, $email);
 			}
+			if($text = 'Проверить почту')
+			{
+				$pass = getKey($name);
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $pass]);
+				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+			}
 			else
 			{
 			    if ($text == "/help") 
@@ -38,13 +45,12 @@
 					$reply = "Информация с помощью:";
 					$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-					$pass = getKey($name);
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $pass]);
 		        }
 		        else
 		        {
-				    $url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $text);
-				    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+					$reply = "Информация с помощью:";
+					$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 			    }
 			}
 

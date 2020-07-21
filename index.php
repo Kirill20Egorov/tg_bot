@@ -29,7 +29,7 @@
             deleteRecords($name);
 		    addRecord($name, $key, $email);
 		}
-		elseif($text = 'Проверить почту')
+		elseif($text == 'Проверить почту')
 		{
 			$pass = getKey($name);
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);

@@ -12,7 +12,7 @@
 	require_once('users.php');
 	if($text)
 	{
-		make_user(make_user($message->getFrom()->getUsername(), $chat_id);
+		// make_user(make_user($message->getFrom()->getUsername(), $chat_id);
 		$reply = "Меню";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);

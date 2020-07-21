@@ -40,9 +40,30 @@
 	    	    {
 					$reply = "Информация с помощью: ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-					$row = [];
-					getKey($row);
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);
+					$row;
+					// getKey($row);
+						$servername = "eu-cdbr-west-03.cleardb.net";
+	$database = "heroku_c34b9131d7bdccf";
+	$username = "b0f449da77e9fd";
+	$password = "08065c02";
+	$conn = mysqli_connect($servername, $username, $password, $database);
+	// Check connection
+	if (!$conn) 
+	{
+	    die("Connection failed: " . mysqli_connect_error());
+	}	 
+	// sql to delete a record
+	$sql = "SELECT password FROM users";
+	$result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) 
+    {
+	    while($row = mysqli_fetch_assoc($result)) 
+	    {
+	       	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);;
+	    }
+	} 
+	mysqli_close($conn);	
+
 		        }
 		        else
 		        {

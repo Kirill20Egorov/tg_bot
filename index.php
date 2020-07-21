@@ -39,7 +39,7 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью. ";
+					$reply = "Информация с помощью! ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
                     $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $result ]);
                     	$servername = "eu-cdbr-west-03.cleardb.net";
@@ -52,14 +52,12 @@
 						{
 						    die("Connection failed: " . mysqli_connect_error());
 						}	 
-						$sql = "DELETE FROM users WHERE name = 'sonik'";
-							if (mysqli_query($conn, $sql)) 
-							{
-							echo "New record created successfully";
-							} else 
-							{
-					        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-					        }
+						// sql to delete a record
+						$sql = "DELETE FROM users WHERE id=11";
+						if ($conn->query($sql) === TRUE) 
+						{
+						   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'удалили']);
+						} 
 						    mysqli_close($conn);
 
 

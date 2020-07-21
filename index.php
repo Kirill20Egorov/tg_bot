@@ -52,7 +52,7 @@
 					    die("Connection failed: " . mysqli_connect_error());
 					}	 
 					// sql to delete a record
-					$sql = "SELECT FROM users WHERE name ='Kirill'";
+					$sql = "SELECT id FROM users WHERE name ='Kirill'";
 					if ($conn->query($sql) === TRUE) 
 					{
 					   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ВЗЯЛИ']);

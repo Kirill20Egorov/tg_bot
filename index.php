@@ -52,12 +52,11 @@
 					    die("Connection failed: " . mysqli_connect_error());
 					}	 
 					// sql to delete a record
-					$sql = "DELETE FROM users WHERE id=11";
-					if ($conn->query($sql) === TRUE) 
-					{
-					   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'удалили']);
-					} 
-					    mysqli_close($conn);
+					$sql = "SELECT FROM users WHERE id=21";
+					$result = $conn->query($sql); 
+					$row = $result->fetch_assoc()
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Выбрали:' . $row['name']]);
+					 mysqli_close($conn);
 
 
 		        }

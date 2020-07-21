@@ -1,6 +1,6 @@
 <?php 
 // Create connection
-function addRecord()
+function addRecord($name, $key, $email)
 {
 	$servername = "eu-cdbr-west-03.cleardb.net";
 	$database = "heroku_c34b9131d7bdccf";

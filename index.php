@@ -54,7 +54,7 @@
 					// sql to delete a record
 					$sql = "SELECT FROM users WHERE id=21";
 					$result = $conn->query($sql); 
-					$row = $result->fetch_assoc()
+					$row = $result->fetch_assoc();
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Выбрали:' . $row['name']]);
 					 mysqli_close($conn);
 

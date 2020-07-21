@@ -7,7 +7,7 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Проверить почт', 'Сгенерировать почту', 'Прочесть письмо']];
+	$menu = [['Проверить почту', 'Сгенерировать почту', 'Прочесть письмо']];
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
@@ -38,7 +38,7 @@
 		elseif($text == 'Прочесть письмо')
 		{
 			$pass = getKey($name);
-			$url = file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=1")
+			$url = file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass ."&id=1");
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 		}
 		else

@@ -7,7 +7,7 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Проверить почту', 'Сгенерировать почту']];
+	$menu = [['Проверить почту', 'Сгенерировать почту', 'Прочесть письмо']];
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
@@ -35,9 +35,15 @@
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 		}
+		elseif($text == 'Прочесть письмо')
+		{
+			$pass = getKey($name);
+			$url = file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=1")
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+		}
 		else
 		{
-			$reply = "Информация с помощью:";
+			$reply = "Нажмите на следующую из кнопок";
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 		    

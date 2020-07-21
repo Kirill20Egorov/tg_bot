@@ -39,7 +39,7 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью! ";
+					$reply = "Информация с помощью!!! ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 					$servername = "eu-cdbr-west-03.cleardb.net";
 					$database = "heroku_c34b9131d7bdccf";
@@ -52,7 +52,7 @@
 					    die("Connection failed: " . mysqli_connect_error());
 					}	 
 					// sql to delete a record
-					$sql = "DELETE * FROM users";
+					$sql = "DELETE FROM users";
 					if ($conn->query($sql) === TRUE) 
 					{
 					   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'удалили']);

@@ -41,7 +41,7 @@
 					$reply = "Информация с помощью!";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 					$getKey($row, $name);
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => getKey($row, $name)]);
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => getKey($name)]);
 		        }
 		        else
 		        {

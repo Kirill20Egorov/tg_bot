@@ -43,7 +43,7 @@ function deleteRecords($name)
 	mysqli_close($conn);
 }
 
-function getKey($row, $name)
+function getKey($name)
 {
 	$servername = "eu-cdbr-west-03.cleardb.net";
 	$database = "heroku_c34b9131d7bdccf";

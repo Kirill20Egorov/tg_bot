@@ -38,7 +38,7 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью: ";
+					$reply = "Информация с помощью!!: ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 					$row;
 					// getKey($row);
@@ -53,14 +53,12 @@
 	    die("Connection failed: " . mysqli_connect_error());
 	}	 
 	// sql to delete a record
-	$sql = "SELECT password FROM users";
+	$sql = "SELECT password FROM users WHERE name = '$name'";
 	$result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) 
     {
-	    while($row = mysqli_fetch_assoc($result)) 
-	    {
-	       	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);
-	    }
+	    $row = mysqli_fetch_assoc($result)
+	    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);
 	} 
 	mysqli_close($conn);	
 

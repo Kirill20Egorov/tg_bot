@@ -12,7 +12,27 @@
 	// require_once('users.php');
 	if($text)
 	{
-		// make_user(make_user($message->getFrom()->getUsername(), $chat_id);
+		$servername = "eu-cdbr-west-03.cleardb.net";
+$database = "heroku_c34b9131d7bdccf";
+$username = "b0f449da77e9fd";
+$password = "08065c02";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $database);
+// Check connection
+if (!$conn) {
+      die("Connection failed: " . mysqli_connect_error());
+}
+ 
+echo "Connected successfully";
+ 
+$sql = "INSERT INTO students (name, lastname, email) VALUES ('Thom', 'Vial', 'thom.v@some.com')";
+if (mysqli_query($conn, $sql)) {
+      echo "New record created successfully";
+} else {
+      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+mysqli_close($conn);
+
 		$reply = "Меню";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);

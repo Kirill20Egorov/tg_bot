@@ -59,7 +59,7 @@
     {
 	    while($row = mysqli_fetch_assoc($result)) 
 	    {
-	       	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);;
+	       	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['password']]);
 	    }
 	} 
 	mysqli_close($conn);	

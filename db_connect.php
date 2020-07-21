@@ -60,4 +60,5 @@ function getKey($row, $name)
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
 	mysqli_close($conn);		
+	return $row['password'];
 }

@@ -43,10 +43,10 @@
 					    die("Connection failed: " . mysqli_connect_error());
 					}	 
 					// sql to delete a record
-					$sql = "DELETE FROM users";
+					$sql = "DELETE FROM users WHERE name = '$name'";
 					if ($conn->query($sql) === TRUE) 
 					{
-					   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'удалили']);
+					   $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'удалили предыдущие']);
 					} 
 					mysqli_close($conn);
 
@@ -58,8 +58,10 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью!.! ";
+					$reply = "Информация с помощью!...! ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+
+
 					$servername = "eu-cdbr-west-03.cleardb.net";
 					$database = "heroku_c34b9131d7bdccf";
 					$username = "b0f449da77e9fd";
@@ -78,7 +80,7 @@
 					    // output data of each row
 					    while($row = mysqli_fetch_assoc($result)) 
 					    {
-					        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ВЗЯЛИ' . $row['password']]);
+					        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Key: ' . $row['password']]);
 					    }
 					} 
 					mysqli_close($conn);

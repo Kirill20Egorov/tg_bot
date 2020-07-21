@@ -7,7 +7,7 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Проверить почту', 'Сгенерировать почту', 'Прочесть письмо']];
+	$menu = [['Проверить почт', 'Сгенерировать почту', 'Прочесть письмо']];
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');

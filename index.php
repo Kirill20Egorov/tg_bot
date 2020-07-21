@@ -8,9 +8,10 @@
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
 	$menu = [['/start', '/email']];
+	include('db_connect.php');
 	if($text)
 	{
-		$reply = "Выберите";
+		$reply = "Меню";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 		if($text == "/start") 

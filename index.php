@@ -31,7 +31,7 @@
 				$key = $obj -> key;
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email]); 
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
-			    // addRecord();
+			    addRecord();
 			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
 			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}
@@ -39,7 +39,7 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью::: ";
+					$reply = "Информация с помощью ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 		        }
 		        else

@@ -18,41 +18,30 @@
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
 		}
-        else
-        {
-			if(($text == '/email') || ($text == 'Сгенерировать почту'))
-			{
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");
-				$obj = json_decode($url);
-				$email =  $obj -> email;
-				$key = $obj -> key;
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email]); 
-			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
-                deleteRecords($name);
-			    addRecord($name, $key, $email);
-			}
-			if($text = 'Проверить почту')
-			{
-				$pass = getKey($name);
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $pass]);
-				$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
-			}
-			else
-			{
-			    if ($text == "/help") 
-	    	    {
-					$reply = "Информация с помощью:";
-					$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-		        }
-		        else
-		        {
-					$reply = "Информация с помощью:";
-					$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-			    }
-			}
+		elseif(($text == '/email') || ($text == 'Сгенерировать почту'))
+		{
+			$url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");
+			$obj = json_decode($url);
+			$email =  $obj -> email;
+			$key = $obj -> key;
+		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email]); 
+		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
+            deleteRecords($name);
+		    addRecord($name, $key, $email);
+		}
+		elseif($text = 'Проверить почту')
+		{
+			$pass = getKey($name);
+			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+		}
+		else
+		{
+			$reply = "Информация с помощью:";
+			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+		    
+		}
 
-	    }
+	    
 	}

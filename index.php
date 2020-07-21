@@ -43,7 +43,7 @@
 					    die("Connection failed: " . mysqli_connect_error());
 					}
 					 
-					$sql = "INSERT INTO users (name, password, email) VALUES ($name, 'Vial', 'thom.v@some.com')";
+					$sql = "INSERT INTO users (name, password, email) VALUES ('$name', 'Vial', 'thom.v@some.com')";
 					if (mysqli_query($conn, $sql)) {
 					      echo "New record created successfully";
 					} else {
@@ -57,7 +57,7 @@
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью. ";
+					$reply = "Информация с помощью: ";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 		        }
 		        else

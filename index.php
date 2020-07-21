@@ -32,26 +32,32 @@
 			    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
 
 			    $servername = "eu-cdbr-west-03.cleardb.net";
-				$database = "heroku_c34b9131d7bdccf";
-				$username = "b0f449da77e9fd";
-				$password = "08065c02";
-				// Create connection
-				$conn = mysqli_connect($servername, $username, $password, $database);
-				// Check connection
-				if (!$conn) 
-				{
-				    die("Connection failed: " . mysqli_connect_error());
-				}
-				 
-				$sql = "INSERT INTO users (name, password, email) VALUES (". $name .", 'Vial', 'thom.v@some.com')";
-
-				mysqli_close($conn);
+					$database = "heroku_c34b9131d7bdccf";
+					$username = "b0f449da77e9fd";
+					$password = "08065c02";
+					// Create connection
+					$conn = mysqli_connect($servername, $username, $password, $database);
+					// Check connection
+					if (!$conn) 
+					{
+					    die("Connection failed: " . mysqli_connect_error());
+					}
+					 
+					$sql = "INSERT INTO users (name, password, email) VALUES (" . $name . ", 'Vial', 'thom.v@some.com')";
+					if (mysqli_query($conn, $sql)) {
+					      echo "New record created successfully";
+					} else {
+					      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+					}
+					mysqli_close($conn);
+			// $reply = "По запросу \"<b>".$text."</b>\" ничего не найдено.";
+			// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply]);
 			}
 			else
 			{
 			    if ($text == "/help") 
 	    	    {
-					$reply = "Информация с помощью..";
+					$reply = "Информация с помощью.";
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 		        }
 		        else

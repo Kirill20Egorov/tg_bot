@@ -8,8 +8,8 @@
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
 	$menu = [['/start', '/email']];
-	require_once('db_connect.php');
-	require_once('users.php');
+	// require_once('db_connect.php');
+	// require_once('users.php');
 	if($text)
 	{
 		// make_user(make_user($message->getFrom()->getUsername(), $chat_id);

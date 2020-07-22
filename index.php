@@ -7,16 +7,20 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Сгенерировать почту']];
+	$menu = [['Сгенерировать почту', 'Проверить почту'], ['Прочитать письма', []];
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
 	if($text)
 	{
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply_markup' => $reply_markup]);
+		
 		if($text == "/start") 
 		{
+			$menu_start = [['Cгенерировать почту']];
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
-			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_start, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
 		}
 		elseif(($text == '/email') || ($text == 'Сгенерировать почту'))

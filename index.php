@@ -15,7 +15,6 @@
 	{
 		if($text == "/start") 
 		{
-			$menu_start = [['Сгенерировать почту']];
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_start, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
@@ -71,6 +70,13 @@
 			$url = file_get_contents("https://post-shift.ru/api.php?action=livetime&key=" . $pass);
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.', 'reply_markup' => $reply_markup]);
+		}
+		elseif($text == 'Продлить время почты')
+		{
+			$pass = getKey($name);
+			$url = file_get_contents("https://post-shift.ru/api.php?action=update&key=" . $pass);
+			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Время продлено до 10 минут', 'reply_markup' => $reply_markup]);
 		}
 		else
 		{

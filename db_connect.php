@@ -14,10 +14,9 @@ function addRecord($name, $key, $email)
 		}
 		 
 		$sql = "INSERT INTO users (name, password, email) VALUES ('$name', '$key', '$email')";
-		if (mysqli_query($conn, $sql)) {
-		      echo "New record created successfully";
-		} else {
-		      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		if (mysqli_query($conn, $sql)) 
+		{
+		    return true;
 		}
 	mysqli_close($conn);
 }
@@ -38,7 +37,7 @@ function deleteRecords($name)
 	$sql = "DELETE FROM users WHERE name = '$name'";
 	if ($conn->query($sql) === TRUE) 
 	{
-	    echo 'text';
+	    return true;
 	} 
 	mysqli_close($conn);
 }

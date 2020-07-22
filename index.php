@@ -60,7 +60,7 @@
 				}
 				else
 				{
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . $url]);
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $url]);
 				}
 			}
 		}

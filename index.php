@@ -9,10 +9,6 @@
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
 	include('menu.php');
 	require_once('db_connect.php');
-$result = getChatId();
-while ($row = mysqli_fetch_array($result)) {
-    	$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $row['chat_id']]);	
-}
 	if($text)
 	{
 		if($text == "/start") 
@@ -88,5 +84,9 @@ while ($row = mysqli_fetch_array($result)) {
 	}
 	else
 	{
-		$telegram->sendMessage(['chat_id' => 765970542, 'text' => 'Привет']);
+		$result = getChatId();
+		while ($row = mysqli_fetch_array($result)) 
+		{
+		    $telegram->sendMessage([ 'chat_id' => $row['chat_id'], 'text' => 'ДАВНО НЕ ГЕНЕРИРОВАЛ ПОЧТУ?']);	
+		}
 	}

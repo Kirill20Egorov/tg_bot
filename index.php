@@ -33,7 +33,15 @@
 		{
 			$pass = getKey($name);
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+			if ($url == 'Error: The list is empty.')
+			{
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
+			}
+			else
+			{
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);		
+			}
+
 		}
 		elseif($text == 'Прочитать письма')
 		{
@@ -47,6 +55,7 @@
 				if (($url == 'Error: Letter not found.') || ($url == 'Error: Key not alive.'))
 				{
 			        $notEmpty = false;
+			        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Писем нет, либо вы еще не создали почту']);
 				}
 				else
 				{

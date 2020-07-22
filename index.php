@@ -46,7 +46,7 @@
 			    $url =  file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=" . $i);
 				if ($url == 'Error: Letter not found.')
 				{
-			        $text = false;
+			        $notEmpty = false;
 				}
 				else
 				{

@@ -12,19 +12,19 @@
 	// require_once('db_connect.php');
 	// require_once('users.php');
 	$telegram->sendMessage(['chat_id' => 765970542, 'text' => 'Привет']);
-	$servername = "eu-cdbr-west-03.cleardb.net";
-	$database = "heroku_c34b9131d7bdccf";
-	$username = "b0f449da77e9fd";
-	$password = "08065c02";	
-	$conn = mysqli_connect($servername, $username, $password, $database);
-	if (!$conn) 
-		die("Connection failed: " . mysqli_connect_error());
-	$sql = "SELECT chat_id FROM users";
-    $result = mysql_query($sql);
-    while($row = mysql_fetch_array($result))
-    {
-        $telegram->sendMessage(['chat_id' => $row['chat_id'], 'text' => 'Сообщение по полученному айди']);
-    }
+	// $servername = "eu-cdbr-west-03.cleardb.net";
+	// $database = "heroku_c34b9131d7bdccf";
+	// $username = "b0f449da77e9fd";
+	// $password = "08065c02";	
+	// $conn = mysqli_connect($servername, $username, $password, $database);
+	// if (!$conn) 
+	// 	die("Connection failed: " . mysqli_connect_error());
+	// $sql = "SELECT chat_id FROM users";
+ //    $result = mysql_query($sql);
+    // while($row = mysql_fetch_array($result))
+    // {
+    //     $telegram->sendMessage(['chat_id' => $row['chat_id'], 'text' => 'Сообщение по полученному айди']);
+    // }
 	if($text)
 	{
 		if($text == "/start") 

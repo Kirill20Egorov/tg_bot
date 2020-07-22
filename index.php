@@ -7,7 +7,7 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Проверить почту', 'Сгенерировать почту'], ['Прочитать письмо']];
+	$menu = [['Проверить почту', 'Сгенерировать почту'], ['Прочитать письма']];
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
@@ -35,11 +35,24 @@
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 		}
-		elseif($text == 'Прочитать письмо')
+		elseif($text == 'Прочитать письма')
 		{
 			$pass = getKey($name);
-			$url =  file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=1");
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+			$notEmpty = true;
+			$i = 0;
+			while ($notEmpty)
+			{
+				$i++;
+			    $url =  file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=" . $i);
+				if ($url == 'Error: Letter not found.')
+				{
+			        $text = false;
+				}
+				else
+				{
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+				}
+			}
 		}
 		else
 		{

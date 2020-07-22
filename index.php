@@ -21,7 +21,7 @@
 		die("Connection failed: " . mysqli_connect_error());
 	$sql = "SELECT chat_id FROM users";
     $result = mysql_query($sql);
-    while($row = mysql_fetch_array($res))
+    while($row = mysql_fetch_array($result))
     {
         $telegram->sendMessage(['chat_id' => $row['chat_id'], 'text' => 'Сообщение по полученному айди']);
     }

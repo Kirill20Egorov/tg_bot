@@ -52,7 +52,7 @@
 			{
 				$i++;
 			    $url =  file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=" . $i);
-				if (($url == 'Error: Letter not found.') || ($url == 'Error: Key not alive.'))
+				if (($url == 'Error: Letter not found.') || ($url == 'Error: Key not alive.') || ($url == 'Error: Key not found.'))
 				{
 			        $notEmpty = false;
 			        $url = file_get_contents('https://post-shift.ru/api.php?action=clear&key=' . $pass);

@@ -89,3 +89,4 @@
 		$reply = 'Введите сообщение';
 		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
 	}
+	$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Шедулер']);

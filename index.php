@@ -13,9 +13,6 @@
 	// require_once('users.php');
 	if($text)
 	{
-		// $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply_markup' => $reply_markup]);
-
 		if($text == "/start") 
 		{
 			$menu_start = [['Cгенерировать почту']];
@@ -29,8 +26,8 @@
 			$obj = json_decode($url);
 			$email =  $obj -> email;
 			$key = $obj -> key;
-		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email]); 
-		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Key: ' . $key]);
+			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . 'Key: ' . $key, 'reply_markup' => $reply_markup]); 
             deleteRecords($name);
 		    addRecord($name, $key, $email);
 		}
@@ -38,15 +35,15 @@
 		{
 			$pass = getKey($name);
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
+			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			if ($url == 'Error: The list is empty.')
 			{
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
 			}
 			else
 			{
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);		
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url, 'reply_markup' => $reply_markup]);		
 			}
-
 		}
 		elseif($text == 'Прочитать письма')
 		{

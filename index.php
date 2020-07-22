@@ -11,7 +11,7 @@
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
-	$telegram->sendMessage(['chat_id' => 765970542, 'text' => 'Привет']);
+
 	// $servername = "eu-cdbr-west-03.cleardb.net";
 	// $database = "heroku_c34b9131d7bdccf";
 	// $username = "b0f449da77e9fd";
@@ -103,3 +103,5 @@
 		$reply = 'Введите сообщение';
 		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
 	}
+	else
+		$telegram->sendMessage(['chat_id' => 765970542, 'text' => 'Привет']);

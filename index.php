@@ -68,7 +68,7 @@
 		{
 			$pass = getKey($name);
 			$url = file_get_contents("https://post-shift.ru/api.php?action=livetime&key=" . $pass);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.']);
 		}
 		else
 		{

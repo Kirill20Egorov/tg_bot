@@ -9,15 +9,10 @@ function addRecord($name, $key, $email)
 	$conn = mysqli_connect($servername, $username, $password, $database);
 	// Check connection
 	if (!$conn) 
-		{
 		    die("Connection failed: " . mysqli_connect_error());
-		}
-		 
-		$sql = "INSERT INTO users (name, password, email) VALUES ('$name', '$key', '$email')";
+	$sql = "INSERT INTO users (name, password, email) VALUES ('$name', '$key', '$email')";
 		if (mysqli_query($conn, $sql)) 
-		{
 		    return true;
-		}
 	mysqli_close($conn);
 }
 
@@ -30,15 +25,11 @@ function deleteRecords($name)
 	$conn = mysqli_connect($servername, $username, $password, $database);
 	// Check connection
 	if (!$conn) 
-	{
-	    die("Connection failed: " . mysqli_connect_error());
-	}	 
+	    die("Connection failed: " . mysqli_connect_error());	 
 	// sql to delete a record
 	$sql = "DELETE FROM users WHERE name = '$name'";
 	if ($conn->query($sql) === TRUE) 
-	{
 	    return true;
-	} 
 	mysqli_close($conn);
 }
 
@@ -51,9 +42,7 @@ function getKey($name)
 	$conn = mysqli_connect($servername, $username, $password, $database);
 	// Check connection
 	if (!$conn) 
-	{
-	    die("Connection failed: " . mysqli_connect_error());
-	}	 
+	    die("Connection failed: " . mysqli_connect_error());	 
 	// sql to delete a record
 	$sql = "SELECT password FROM users WHERE name = '$name'";
 	$result = mysqli_query($conn, $sql);

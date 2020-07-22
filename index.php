@@ -35,13 +35,9 @@
 			$pass = getKey($name);
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
 			if ($url == 'Error: The list is empty.')
-			{
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
-			}
 			else
-			{
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);		
-			}
 		}
 		elseif($text == 'Прочитать письма')
 		{
@@ -56,12 +52,14 @@
 				{
 			        $notEmpty = false;
 			        $url = file_get_contents('https://post-shift.ru/api.php?action=clear&key=' . $pass);
-			        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Писем нет.']);
+			        if ($url == 'Error: Key not found.')
+                        $reply = 'Время действия почты закончилось.';
+			        else
+			        	$reply = 'Писем нет.';
+			        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
 				}
 				else
-				{
 					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $url]);
-				}
 			}
 		}
 		elseif($text == 'Проверить оставшееся время')
@@ -85,4 +83,9 @@
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 		    
 		}	    
+	}
+	else
+	{
+		$reply = 'Введите сообщение';
+		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
 	}

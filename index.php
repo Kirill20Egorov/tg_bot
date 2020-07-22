@@ -35,14 +35,13 @@
 		{
 			$pass = getKey($name);
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
-			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			if ($url == 'Error: The list is empty.')
 			{
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
 			}
 			else
 			{
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url, 'reply_markup' => $reply_markup]);		
+				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);		
 			}
 		}
 		elseif($text == 'Прочитать письма')
@@ -70,7 +69,8 @@
 		{
 			$pass = getKey($name);
 			$url = file_get_contents("https://post-shift.ru/api.php?action=livetime&key=" . $pass);
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.']);
+			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.', 'reply_markup' => $reply_markup]);
 		}
 		else
 		{

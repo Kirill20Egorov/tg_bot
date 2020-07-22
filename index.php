@@ -35,6 +35,12 @@
 			$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
 		}
+		elseif($text == 'Прочитать письмо')
+		{
+			$pass = getKey($name);
+			$url =  file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=1&type=json");
+			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+		}
 		else
 		{
 			$reply = "Информация с помощью:";

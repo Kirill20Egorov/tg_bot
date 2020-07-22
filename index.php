@@ -15,7 +15,7 @@
 	{
 		if($text == "/start") 
 		{
-			$menu_start = [['Cгенерировать почту']];
+			$menu_start = [['Сгенерировать почту']];
 			$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_start, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
@@ -27,7 +27,7 @@
 			$email =  $obj -> email;
 			$key = $obj -> key;
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' Password: ' . $key, 'reply_markup' => $reply_markup]); 
+		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' <br/> Password: ' . $key, 'reply_markup' => $reply_markup]); 
             deleteRecords($name);
 		    addRecord($name, $key, $email);
 		}
@@ -78,7 +78,5 @@
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 		    
-		}
-
-	    
+		}	    
 	}

@@ -7,15 +7,15 @@
 	$text = $result["message"]["text"]; //Текст сообщения
 	$chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 	$name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-	$menu = [['Сгенерировать почту', 'Проверить почту'], ['Прочитать письма', []];
+	$menu = [['Сгенерировать почту', 'Проверить почту'], ['Прочитать письма', ['Проверить оставшееся время']];
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
 	if($text)
 	{
-		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply_markup' => $reply_markup]);
-		
+		// $reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+		// $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'reply_markup' => $reply_markup]);
+
 		if($text == "/start") 
 		{
 			$menu_start = [['Cгенерировать почту']];

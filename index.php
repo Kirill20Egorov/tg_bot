@@ -11,7 +11,7 @@
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
-	$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Привет, скучала?']);
+	$telegram->sendMessage(['chat_id' => 765970542, 'text' => 'Привет']);
 	if($text)
 	{
 		if($text == "/start") 

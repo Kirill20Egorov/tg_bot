@@ -1,6 +1,6 @@
 <?php 
 // Create connection
-function addRecord($name, $key, $email)
+function addRecord($name, $key, $chat_id)
 {
 	$servername = "eu-cdbr-west-03.cleardb.net";
 	$database = "heroku_c34b9131d7bdccf";
@@ -10,7 +10,7 @@ function addRecord($name, $key, $email)
 	// Check connection
 	if (!$conn) 
 		    die("Connection failed: " . mysqli_connect_error());
-	$sql = "INSERT INTO users (name, password, email) VALUES ('$name', '$key', '$email')";
+	$sql = "INSERT INTO users (name, password, chat_id) VALUES ('$name', '$key', '$chat_id')";
 		if (mysqli_query($conn, $sql)) 
 		    return true;
 	mysqli_close($conn);

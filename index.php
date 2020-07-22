@@ -11,6 +11,7 @@
 	require_once('db_connect.php');
 	// require_once('db_connect.php');
 	// require_once('users.php');
+	$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Привет, скучала?']);
 	if($text)
 	{
 		if($text == "/start") 
@@ -28,7 +29,7 @@
 			$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		    $telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' Password: ' . $key, 'reply_markup' => $reply_markup]); 
             deleteRecords($name);
-		    addRecord($name, $key, $email);
+		    addRecord($name, $key, $chat_id);
 		}
 		elseif($text == 'Проверить почту')
 		{

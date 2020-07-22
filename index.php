@@ -55,11 +55,12 @@
 				if (($url == 'Error: Letter not found.') || ($url == 'Error: Key not alive.'))
 				{
 			        $notEmpty = false;
+			        $url = file_get_contents('https://post-shift.ru/api.php?action=clear&key=' . $pass);
 			        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Писем нет, либо вы еще не создали почту']);
 				}
 				else
 				{
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . $url]);
 				}
 			}
 		}

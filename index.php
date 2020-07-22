@@ -94,8 +94,5 @@ $sql = 'SELECT chat_id FROM users';
 	}
 	else
 	{
-		$reply = 'Введите сообщение';
-		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
-	}
-	else
 		$telegram->sendMessage(['chat_id' => 765970542, 'text' => 'Привет']);
+	}

@@ -82,11 +82,4 @@
 		    
 		}	    
 	}
-	else
-	{
-		$result = getChatId();
-		while ($row = mysqli_fetch_array($result)) 
-		{
-		    $telegram->sendMessage([ 'chat_id' => $row['chat_id'], 'text' => 'ДАВНО НЕ ГЕНЕРИРОВАЛ ПОЧТУ?']);	
-		}
-	}
+

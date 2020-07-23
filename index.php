@@ -29,7 +29,6 @@ switch($text)
 		$obj = json_decode($response);
 		$reply = 'Email: ' . $obj->email . PHP_EOL . 'Password: ' . $obj->key;
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		$telegram->sendMessage(['chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]); 
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $obj->key, $chat_id);
 	    break;

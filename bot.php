@@ -1,7 +1,6 @@
 <?php
 
 include('vendor/autoload.php'); //Подключаем библиотеку
-include('index.php');
 use Telegram\Bot\Api;
 $SERVERNAME = "eu-cdbr-west-03.cleardb.net");
 $DATABASE = "heroku_c34b9131d7bdccf");

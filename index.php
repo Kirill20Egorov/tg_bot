@@ -13,7 +13,7 @@ define("SERVERNAME", "eu-cdbr-west-03.cleardb.net");
 define("DATABASE", "heroku_c34b9131d7bdccf");
 define("USERNAME", "b0f449da77e9fd");
 define("PASSWORD", "08065c02");
-define("URL", "https://post-shift.ru/api.php?action=");
+define("URL", "https://post-shift.ru/api.php?action=");	
 $conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
@@ -67,7 +67,7 @@ switch($text)
 		break;
 	case 'Проверить оставшееся время':
 		$pass = getKey($conn, $name);
-		$url = file_get_contents(URL . "livetime&key=" . $pass);
+		$response = file_get_contents(URL . "livetime&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.', 'reply_markup' => $reply_markup]);
 		break;

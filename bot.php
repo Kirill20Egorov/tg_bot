@@ -17,3 +17,4 @@ while ($row = mysqli_fetch_array($result))
 {
     $telegram->sendMessage([ 'chat_id' => $row['chat_id'], 'text' => 'Привет, бот TempMail снова готов помочь тебе']);	
 }
+mysqli_close($conn);

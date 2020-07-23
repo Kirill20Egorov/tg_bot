@@ -81,5 +81,12 @@
 			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 		    
 		}	    
+		else
+		{
+				while ($row = mysqli_fetch_array($result)) 
+	{
+		$telegram->sendMessage([ 'chat_id' => $row['chat_id'], 'text' => 'Привет, бот TempMail снова доступен на сегодня']);	
+	}
+		}
 	}
 

@@ -33,7 +33,7 @@ switch($text)
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' Password: ' . $key, 'reply_markup' => $reply_markup]); 
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $key, $chat_id);
-	break;
+	    break;
 	case 'Проверить почту':
 		$pass = getKey($conn, $name);
 		$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
@@ -63,7 +63,7 @@ switch($text)
 			else
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $url]);
 		}
-		break
+		break;
 	case 'Проверить оставшееся время':
 		$pass = getKey($conn, $name);
 		$url = file_get_contents("https://post-shift.ru/api.php?action=livetime&key=" . $pass);

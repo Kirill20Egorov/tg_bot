@@ -16,16 +16,15 @@ define("PASSWORD", "08065c02");
 $conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
-if($text)
+switch($text)
 {
-	if($text == "/start") 
-	{
+	case "/start":
 		$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_start, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
-	}
-	elseif(($text == '/email') || ($text == 'Сгенерировать почту'))
-	{
+		break;
+	case '/email':
+	case 'Сгенерировать почту':
 		$url =  file_get_contents("https://post-shift.ru/api.php?action=new&type=json");
 		$obj = json_decode($url);
 		$email =  $obj -> email;
@@ -34,18 +33,16 @@ if($text)
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' Password: ' . $key, 'reply_markup' => $reply_markup]); 
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $key, $chat_id);
-	}
-	elseif($text == 'Проверить почту')
-	{
+	break;
+	case 'Проверить почту':
 		$pass = getKey($conn, $name);
 		$url =  file_get_contents("https://post-shift.ru/api.php?action=getlist&key=" . $pass);
 		if ($url == 'Error: The list is empty.')
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
 		else
 			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $url]);		
-	}
-	elseif($text == 'Прочитать письма')
-	{
+		break;
+	case 'Прочитать письма':
 		$pass = getKey($conn, $name);
 		$notEmpty = true;
 		$i = 0;
@@ -66,25 +63,22 @@ if($text)
 			else
 				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $url]);
 		}
-	}
-	elseif($text == 'Проверить оставшееся время')
-	{
+		break
+	case 'Проверить оставшееся время':
 		$pass = getKey($conn, $name);
 		$url = file_get_contents("https://post-shift.ru/api.php?action=livetime&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.', 'reply_markup' => $reply_markup]);
-	}
-	elseif($text == 'Продлить время почты')
-	{
+		break;
+	case 'Продлить время почты':
 		$pass = getKey($conn, $name);
 		$url = file_get_contents("https://post-shift.ru/api.php?action=update&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Время продлено до 10 минут', 'reply_markup' => $reply_markup]);
-	}
-	else
-	{
+		break;
+	default:
 		$reply = "Информация с помощью:";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
-	}	    
+		break;  
 }

@@ -2,7 +2,7 @@
 
 include('vendor/autoload.php'); //Подключаем библиотеку
 include('menu.php');   //кпопки
-include('db_connect.php');  //функции для работы с БД
+include('db_requests.php');  //функции для работы с БД
 use Telegram\Bot\Api;
 define("SERVERNAME", "eu-cdbr-west-03.cleardb.net");
 define("DATABASE", "heroku_c34b9131d7bdccf");

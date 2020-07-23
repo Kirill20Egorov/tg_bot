@@ -1,21 +1,21 @@
 <?php
 
 include('vendor/autoload.php'); //Подключаем библиотеку
+include('menu.php');   //кпопки
+include('db_connect.php');  //функции для работы с БД
 use Telegram\Bot\Api;
 $telegram = new Api('1234407965:AAEgvF_OTn7A0KutIWRTzfiX2AhKTfaSXC4'); //Устанавливаем токен, полученный у BotFather
 $result = $telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
 $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
-$servername = "eu-cdbr-west-03.cleardb.net";
-$database = "heroku_c34b9131d7bdccf";
-$username = "b0f449da77e9fd";
-$password = "08065c02";	
-$conn = mysqli_connect($servername, $username, $password, $database);
+define("SERVERNAME", "eu-cdbr-west-03.cleardb.net");
+define("DATABASE", "heroku_c34b9131d7bdccf");
+define("USERNAME", "b0f449da77e9fd");
+define("PASSWORD", "08065c02");
+$conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
-include('menu.php');
-require_once('db_connect.php');
 if($text)
 {
 	if($text == "/start") 

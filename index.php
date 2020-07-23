@@ -4,11 +4,6 @@ include('vendor/autoload.php'); //Подключаем библиотеку
 include('menu.php');   //кпопки
 include('db_requests.php');  //функции для работы с БД
 use Telegram\Bot\Api;
-define("SERVERNAME", "eu-cdbr-west-03.cleardb.net");
-define("DATABASE", "heroku_c34b9131d7bdccf");
-define("USERNAME", "b0f449da77e9fd");
-define("PASSWORD", "08065c02");
-define("URL", "https://post-shift.ru/api.php?action=");	
 $telegram = new Api('1234407965:AAEgvF_OTn7A0KutIWRTzfiX2AhKTfaSXC4'); //Устанавливаем токен, полученный у BotFather
 $result = $telegram->getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
 $text = $result["message"]["text"]; //Текст сообщения

@@ -1,49 +1,23 @@
 <?php 
 // Create connection
-function addRecord($name, $key, $chat_id)
+function addRecord($conn, $name, $key, $chat_id)
 {
-	$servername = "eu-cdbr-west-03.cleardb.net";
-	$database = "heroku_c34b9131d7bdccf";
-	$username = "b0f449da77e9fd";
-	$password = "08065c02";
-	$conn = mysqli_connect($servername, $username, $password, $database);
-	// Check connection
-	if (!$conn) 
-		    die("Connection failed: " . mysqli_connect_error());
 	$sql = "INSERT INTO users (name, password, chat_id) VALUES ('$name', '$key', '$chat_id')";
 		if (mysqli_query($conn, $sql)) 
 		    return true;
 	mysqli_close($conn);
 }
 
-function deleteRecords($name)
-{
-	$servername = "eu-cdbr-west-03.cleardb.net";
-	$database = "heroku_c34b9131d7bdccf";
-	$username = "b0f449da77e9fd";
-	$password = "08065c02";
-	$conn = mysqli_connect($servername, $username, $password, $database);
-	// Check connection
-	if (!$conn) 
-	    die("Connection failed: " . mysqli_connect_error());	 
-	// sql to delete a record
+function deleteRecords($conn, $name)
+{ 
 	$sql = "DELETE FROM users WHERE name = '$name'";
 	if ($conn->query($sql) === TRUE) 
 	    return true;
 	mysqli_close($conn);
 }
 
-function getKey($name)
-{
-	$servername = "eu-cdbr-west-03.cleardb.net";
-	$database = "heroku_c34b9131d7bdccf";
-	$username = "b0f449da77e9fd";
-	$password = "08065c02";
-	$conn = mysqli_connect($servername, $username, $password, $database);
-	// Check connection
-	if (!$conn) 
-	    die("Connection failed: " . mysqli_connect_error());	 
-	// sql to delete a record
+function getKey($conn, $name)
+{ 
 	$sql = "SELECT password FROM users WHERE name = '$name'";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
@@ -51,19 +25,9 @@ function getKey($name)
 	return $row['password'];
 }
 
-function getChatId()
+function getChatId($conn)
 {
-	$servername = "eu-cdbr-west-03.cleardb.net";
-	$database = "heroku_c34b9131d7bdccf";
-	$username = "b0f449da77e9fd";
-	$password = "08065c02";	
-	$conn = mysqli_connect($servername, $username, $password, $database);
-	if (!$conn) 
-		die("Connection failed: " . mysqli_connect_error());
 	$sql = 'SELECT chat_id FROM users';
-
 	$result = mysqli_query($conn, $sql);
-
 	return $result;
-
 }

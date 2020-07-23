@@ -37,13 +37,13 @@ switch($text)
 			$reply = $response;		
 		break;
 	case 'Прочитать письма':
-		$notEmpty = true;
+		$not_empty = true;
 		$i = 0;
-		while ($notEmpty)
+		while ($not_empty)
 		{
 			$i++;
 			$response =  file_get_contents(URL . "getmail&key=" . $pass . "&id=" . $i);
-			$notEmpty = false;
+			$not_empty = false;
 			switch($response)
 			{
 				case 'Error: Letter not found.':
@@ -58,7 +58,7 @@ switch($text)
 					break;
 				default:
 					$reply = 'ID: ' . $i . ' Message: ' . $response;
-					$notEmpty = true;
+					$not_empty = true;
 					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 					break;
 			}

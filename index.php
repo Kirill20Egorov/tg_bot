@@ -14,6 +14,7 @@ $conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
 $pass = getKey($conn, $name);
+$keyboard = $menu;
 switch($text)
 {
 	case "/start":

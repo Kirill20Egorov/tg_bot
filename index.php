@@ -22,16 +22,15 @@ switch($text)
 	case "/start":
 		$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_start, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
+		$telegram->sendMessage(['chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]);
 		break;
 	case '/email':
 	case 'Сгенерировать почту':
 		$response =  file_get_contents(URL . "new&type=json");
 		$obj = json_decode($response);
-		$email =  $obj->email;
-		$key = $obj->key;
+		$reply = 'Email: ' . $obj->email . PHP_EOL . ' Password: ' . $obj->key;
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' Password: ' . $key, 'reply_markup' => $reply_markup]); 
+		$telegram->sendMessage(['chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply, 'reply_markup' => $reply_markup]); 
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $key, $chat_id);
 	    break;
@@ -39,9 +38,9 @@ switch($text)
 		$pass = getKey($conn, $name);
 		$response =  file_get_contents(URL . "getlist&key=" . $pass);
 		if ($response == 'Error: The list is empty.')
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
+			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Нет новых писем. Повторите позже']);		
 		else
-			$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $response]);		
+			$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $response]);		
 		break;
 	case 'Прочитать письма':
 		$pass = getKey($conn, $name);
@@ -60,10 +59,10 @@ switch($text)
 					$reply = 'Время действия почты закончилось.';
 					$notEmpty = false;
 					$response = file_get_contents(URL . 'clear&key=' . $pass);
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
+					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
 					break;
 				default:
-					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $response]);
+					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $response]);
 					break;
 			}
 		}
@@ -72,13 +71,13 @@ switch($text)
 		$pass = getKey($conn, $name);
 		$response = file_get_contents(URL . "livetime&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $response . ' секунд.', 'reply_markup' => $reply_markup]);
+		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $response . ' секунд.', 'reply_markup' => $reply_markup]);
 		break;
 	case 'Продлить время почты':
 		$pass = getKey($conn, $name);
 		$response = file_get_contents(URL . "update&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
-		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Время продлено до 10 минут', 'reply_markup' => $reply_markup]);
+		$telegram->sendMessage(['chat_id' => $chat_id, 'text' => 'Время продлено до 10 минут', 'reply_markup' => $reply_markup]);
 		break;
 	default:
 		$reply = "Информация с помощью:";

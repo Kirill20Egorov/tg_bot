@@ -5,6 +5,7 @@ include('menu.php');   //кпопки
 include('db_requests.php');  //функции для работы с БД
 use Telegram\Bot\Api;
 define("URL", "https://post-shift.ru/api.php?action=");
+define("EMPTY", " ");
 $telegram = new Api('1234407965:AAEgvF_OTn7A0KutIWRTzfiX2AhKTfaSXC4'); //Устанавливаем токен, полученный у BotFather
 $result = $telegram->getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
 $text = $result["message"]["text"]; //Текст сообщения
@@ -44,26 +45,28 @@ switch($text)
 		{
 			$i++;
 			$response =  file_get_contents(URL . "getmail&key=" . $pass . "&id=" . $i);
+			$notEmpty = false;
 			switch($response)
 			{
 				case 'Error: Letter not found.':
 					$reply = 'Писем нет.';
-					$notEmpty = false;
 					break;
 				case 'Error: Key not found.':
 					$reply = 'Время действия почты закончилось.';
-					$notEmpty = false;
+
 				    break;
 				case 'Error: Key not alive.':
                     $reply = "Почта не существует.";
-                    $notEmpty = false;
 					break;
 				default:
 					$reply = 'ID: ' . $i . ' Message: ' . $response;
+					$notEmpty = true;
 					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 					break;
 			}
 		}
+		if ($i > 1)
+			$reply = EMPTY;
 		break;
 	case 'Проверить оставшееся время':
 		$pass = getKey($conn, $name);
@@ -82,5 +85,9 @@ switch($text)
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		break;  
 	}
-$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
+if ($reply != EMPTY)
+{
+	$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);	
+}
+
 mysqli_close($conn);

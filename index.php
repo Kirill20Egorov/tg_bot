@@ -18,20 +18,20 @@ switch($text)
 {
 	case "/start":
 		$reply = $name . ", Добро пожаловать в бота! Введите команду /email, чтобы создать новую почту ";
-		$keyboard = $menu_start;
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_start, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		break;
 	case '/email':
 	case 'Сгенерировать почту':
 		$response =  file_get_contents(URL . "new&type=json");
 		$obj = json_decode($response);
 		$reply = 'Email: ' . $obj->email . PHP_EOL . 'Password: ' . $obj->key;
-		$keyboard = $menu_email;
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $obj->key, $chat_id);
 	    break;
 	case 'Проверить почту':
 		$response =  file_get_contents(URL . "getlist&key=" . $pass);
-		if ($response === 'Error: The list is empty.')
+		if ($response == 'Error: The list is empty.')
 			$reply = 'Нет новых писем. Повторите позже';		
 		else
 			$reply = $response;		
@@ -66,20 +66,18 @@ switch($text)
 		break;
 	case 'Проверить оставшееся время':
 		$response = file_get_contents(URL . "livetime&key=" . $pass);
-		$keyboard = $menu_time;
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$reply = 'Оставшееся время жизни почты: ' . $response . ' секунд.';
 		break;
 	case 'Продлить время почты':
-		$pass = getKey($conn, $name);
 		$response = file_get_contents(URL . "update&key=" . $pass);
-		$keyboard = $menu_time; 
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$reply = 'Время продлено до 10 минут';
 		break;
 	default:
 		$reply = "Информация с помощью:";
-		$keyboard = $menu;
+		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		break;  
 	}
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 mysqli_close($conn);

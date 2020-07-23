@@ -13,7 +13,7 @@ define("SERVERNAME", "eu-cdbr-west-03.cleardb.net");
 define("DATABASE", "heroku_c34b9131d7bdccf");
 define("USERNAME", "b0f449da77e9fd");
 define("PASSWORD", "08065c02");
-define("URL", "https://post-shift.ru/api.php?action=")
+define("URL", "https://post-shift.ru/api.php?action=");
 $conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
@@ -50,11 +50,11 @@ switch($text)
 		while ($notEmpty)
 		{
 			$i++;
-			$url =  file_get_contents("https://post-shift.ru/api.php?action=getmail&key=" . $pass . "&id=" . $i);
+			$url =  file_get_contents(URL . "getmail&key=" . $pass . "&id=" . $i);
 			if (($url == 'Error: Letter not found.') || ($url == 'Error: Key not alive.') || ($url == 'Error: Key not found.'))
 			{
 				$notEmpty = false;
-		        $url = file_get_contents('https://post-shift.ru/api.php?action=clear&key=' . $pass);
+		        $url = file_get_contents(URL . 'clear&key=' . $pass);
 				if ($url == 'Error: Key not found.')
 					$reply = 'Время действия почты закончилось.';
 				else
@@ -67,13 +67,13 @@ switch($text)
 		break;
 	case 'Проверить оставшееся время':
 		$pass = getKey($conn, $name);
-		$url = file_get_contents("https://post-shift.ru/api.php?action=livetime&key=" . $pass);
+		$url = file_get_contents(URL . "livetime&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Оставшееся время жизни почты: ' . $url . ' секунд.', 'reply_markup' => $reply_markup]);
 		break;
 	case 'Продлить время почты':
 		$pass = getKey($conn, $name);
-		$url = file_get_contents("https://post-shift.ru/api.php?action=update&key=" . $pass);
+		$url = file_get_contents(URL . "update&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'Время продлено до 10 минут', 'reply_markup' => $reply_markup]);
 		break;

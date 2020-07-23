@@ -1,7 +1,7 @@
 <?php
 
 include('vendor/autoload.php'); //Подключаем библиотеку
-include('db_connect.php');
+include('db_requests.php');
 use Telegram\Bot\Api;
 $telegram = new Api('1234407965:AAEgvF_OTn7A0KutIWRTzfiX2AhKTfaSXC4');
 define("SERVERNAME", "eu-cdbr-west-03.cleardb.net");

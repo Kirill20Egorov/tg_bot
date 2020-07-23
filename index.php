@@ -13,6 +13,7 @@ $name = $result["message"]["from"]["first_name"]; //Юзернейм польз�
 $conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
+$pass = getKey($conn, $name);
 switch($text)
 {
 	case "/start":
@@ -29,7 +30,6 @@ switch($text)
 		addRecord($conn, $name, $obj->key, $chat_id);
 	    break;
 	case 'Проверить почту':
-		$pass = getKey($conn, $name);
 		$response =  file_get_contents(URL . "getlist&key=" . $pass);
 		if ($response == 'Error: The list is empty.')
 			$reply = 'Нет новых писем. Повторите позже';		
@@ -37,7 +37,6 @@ switch($text)
 			$reply = $response;		
 		break;
 	case 'Прочитать письма':
-		$pass = getKey($conn, $name);
 		$notEmpty = true;
 		$i = 0;
 		while ($notEmpty)
@@ -66,7 +65,6 @@ switch($text)
 		}
 		break;
 	case 'Проверить оставшееся время':
-		$pass = getKey($conn, $name);
 		$response = file_get_contents(URL . "livetime&key=" . $pass);
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_time, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$reply = 'Оставшееся время жизни почты: ' . $response . ' секунд.';

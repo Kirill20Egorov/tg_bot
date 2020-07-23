@@ -14,7 +14,7 @@ $conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 if (!$conn) 
 	die("Connection failed: " . mysqli_connect_error());
 $pass = getKey($conn, $name);
-$keyboard = $menu;
+$keyboard = $menu_email;
 switch($text)
 {
 	case "/start":
@@ -26,7 +26,6 @@ switch($text)
 		$response =  file_get_contents(URL . "new&type=json");
 		$obj = json_decode($response);
 		$reply = 'Email: ' . $obj->email . PHP_EOL . 'Password: ' . $obj->key;
-		$keyboard = $menu_email;
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $obj->key, $chat_id);
 	    break;

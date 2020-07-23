@@ -52,10 +52,15 @@ switch($text)
 			{
 				case 'Error: Letter not found.':
 					$reply = 'Писем нет.';
+					$notEmpty = false;
+					break;
 				case 'Error: Key not found.':
 					$reply = 'Время действия почты закончилось.';
+				    $notEmpty = false;
+				    break;
 				case 'Error: Key not alive.':
-					$notEmpty = false;
+                    $notEmpty = false;
+                    $reply = "Почта не существует."
 					break;
 				default:
 					$reply = 'ID: ' . $i . ' Message: ' . $response;

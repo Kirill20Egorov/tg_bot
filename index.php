@@ -10,7 +10,7 @@ define("USERNAME", "b0f449da77e9fd");
 define("PASSWORD", "08065c02");
 define("URL", "https://post-shift.ru/api.php?action=");	
 $telegram = new Api('1234407965:AAEgvF_OTn7A0KutIWRTzfiX2AhKTfaSXC4'); //Устанавливаем токен, полученный у BotFather
-$result = $telegram -> getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
+$result = $telegram->getWebhookUpdates(); //Передаем в переменную $result полную информацию о сообщении пользователя
 $text = $result["message"]["text"]; //Текст сообщения
 $chat_id = $result["message"]["chat"]["id"]; //Уникальный идентификатор пользователя
 $name = $result["message"]["from"]["first_name"]; //Юзернейм пользователя
@@ -28,8 +28,8 @@ switch($text)
 	case 'Сгенерировать почту':
 		$response =  file_get_contents(URL . "new&type=json");
 		$obj = json_decode($response);
-		$email =  $obj -> email;
-		$key = $obj -> key;
+		$email =  $obj->email;
+		$key = $obj->key;
 		$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $menu_email, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
 		$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' =>  'Email: ' . $email . ' Password: ' . $key, 'reply_markup' => $reply_markup]); 
 		deleteRecords($conn, $name);

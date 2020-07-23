@@ -51,18 +51,21 @@ switch($text)
 		{
 			$i++;
 			$response =  file_get_contents(URL . "getmail&key=" . $pass . "&id=" . $i);
-			if (($response == 'Error: Letter not found.') || ($response == 'Error: Key not alive.') || ($response == 'Error: Key not found.'))
+			switch($response)
 			{
-				$notEmpty = false;
-		        $response = file_get_contents(URL . 'clear&key=' . $pass);
-				if ($response == 'Error: Key not found.')
-					$reply = 'Время действия почты закончилось.';
-				else
+				case 'Error: Letter not found.':
 					$reply = 'Писем нет.';
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
+				case 'Error: Key not alive.':
+				case 'Error: Key not found.':
+					$reply = 'Время действия почты закончилось.';
+					$notEmpty = false;
+					$response = file_get_contents(URL . 'clear&key=' . $pass);
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply]);
+					break;
+				default:
+					$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $response]);
+					break;
 			}
-			else
-				$telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => 'ID: ' . $i . ' Message: ' . $response]);
 		}
 		break;
 	case 'Проверить оставшееся время':

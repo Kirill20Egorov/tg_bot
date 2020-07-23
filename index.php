@@ -43,22 +43,23 @@ switch($text)
 		while ($notEmpty)
 		{
 			$i++;
-			$notEmpty = false;
 			$response =  file_get_contents(URL . "getmail&key=" . $pass . "&id=" . $i);
 			switch($response)
 			{
 				case 'Error: Letter not found.':
 					$reply = 'Писем нет.';
+					$notEmpty = false;
 					break;
 				case 'Error: Key not found.':
 					$reply = 'Время действия почты закончилось.';
+					$notEmpty = false;
 				    break;
 				case 'Error: Key not alive.':
                     $reply = "Почта не существует.";
+                    $notEmpty = false;
 					break;
 				default:
 					$reply = 'ID: ' . $i . ' Message: ' . $response;
-					$notEmpty = true;
 					$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 					break;
 			}

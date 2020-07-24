@@ -28,7 +28,7 @@ switch($text)
 		$reply = 'Email: ' . $obj->email . PHP_EOL . 'Password: ' . $obj->key;
 		deleteRecords($conn, $name);
 		addRecord($conn, $name, $obj->key, $chat_id);
-	    break;
+		break;
 	case 'Проверить почту':
 		$response =  file_get_contents(URL . "getlist&key=" . $pass);
 		if ($response == 'Error: The list is empty.')
@@ -54,7 +54,7 @@ switch($text)
 
 				    break;
 				case 'Error: Key not alive.':
-                    $reply = "Почта не существует.";
+					$reply = "Почта не существует.";
 					break;
 				default:
 					$reply = 'ID: ' . $i . ' Message: ' . $response;
@@ -78,7 +78,7 @@ switch($text)
 		$reply = "Информация с помощью:";
 		$keyboard = $menu;
 		break;  
-	}
-$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);
+}
+$reply_markup = $telegram->replyKeyboardMarkup(['keyboard' => $keyboard, 'resize_keyboard' => true, 'one_time_keyboard' => true]);	
 $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply, 'reply_markup' => $reply_markup]);
 mysqli_close($conn);
